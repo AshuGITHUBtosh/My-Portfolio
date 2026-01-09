@@ -1,0 +1,129 @@
+.achievements {
+  min-height: 100vh;
+  padding: var(--spacing-xl) 0;
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.achievementsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: var(--spacing-lg);
+  max-width: 1200px;
+  margin: 0 auto;
+  perspective: 1000px;
+}
+
+.achievementCard {
+  background: var(--card-bg);
+  backdrop-filter: blur(10px);
+  padding: var(--spacing-lg);
+  border-radius: 20px;
+  border: 1px solid var(--border-color);
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  transition: all var(--transition-base);
+  transform-style: preserve-3d;
+}
+
+.achievementCard::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: var(--gradient-primary);
+  opacity: 0;
+  transition: opacity var(--transition-base);
+  z-index: 0;
+}
+
+.achievementCard:hover::before {
+  opacity: 0.1;
+}
+
+.cardGlow {
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, var(--accent-primary) 0%, transparent 70%);
+  opacity: 0;
+  transition: opacity var(--transition-base);
+  z-index: 0;
+}
+
+.achievementCard:hover .cardGlow {
+  opacity: 0.2;
+  animation: rotate 3s linear infinite;
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.achievementIcon {
+  font-size: 4rem;
+  margin-bottom: var(--spacing-md);
+  position: relative;
+  z-index: 1;
+  display: inline-block;
+  animation: float 3s ease-in-out infinite;
+}
+
+.achievementContent {
+  position: relative;
+  z-index: 1;
+}
+
+.achievementTitle {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: var(--spacing-sm);
+  background: var(--gradient-text);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.achievementDescription {
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin-bottom: var(--spacing-md);
+  font-size: 1rem;
+}
+
+.achievementYear {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  background: var(--gradient-primary);
+  color: var(--text-primary);
+  border-radius: 20px;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+@media (max-width: 768px) {
+  .achievementsGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .achievementCard {
+    padding: var(--spacing-md);
+  }
+
+  .achievementIcon {
+    font-size: 3rem;
+  }
+}
+
