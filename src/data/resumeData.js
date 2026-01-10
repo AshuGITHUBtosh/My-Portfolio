@@ -5,7 +5,7 @@ export const resumeData = {
     tagline: "Building autonomous systems and intelligent solutions at the intersection of AI, Computer Vision, and Robotics",
     email: "ashutosh10503@gmail.com",
     phone: "+91 9149051767",
-    linkedin: "Ashutosh Bhardwaj",
+    linkedin: "ashut",
     github: "AshuGITHUBtosh",
     location: "Vellore, Tamil Nadu, India"
   },
@@ -118,13 +118,13 @@ export const resumeData = {
     {
       title: "International Rover Challenge 2024",
       description: "Ranked 19th internationally",
-      icon: "🥈",
+      icon: "🏆",
       year: "2024"
     },
     {
       title: "NXP AIM",
       description: "Reached Regional Finals among 100+ competing teams",
-      icon: "🎯",
+      icon: "🏆",
       year: "2024"
     }
   ]
