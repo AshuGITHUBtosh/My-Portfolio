@@ -60,8 +60,8 @@ export const resumeData = {
       period: "May 2023 - Present",
       location: "Vellore, Tamil Nadu",
       achievements: [
-        "Engineered autonomous navigation using ROS, SLAM Toolbox, and Nav2, improving path efficiency by 30% and reducing collision risk by 25%",
-        "Integrated Intel RealSense D455 to generate point cloud-based 3D maps, enabling localization accuracy within 5 cm",
+        "Worked in my collages Martian rover team named Team Vyadh as an Autonomous member and participated in International competition",
+        "Worked with ROS and sensors like LIDAR, IMU, depth Camera to implement SLAM and Nav2 stack for autonomous navigation in unstructured terrains",
         "Mentored 10+ recruits, reducing onboarding time by 40% through structured ROS training and module-based assignments"
       ],
   images: [
@@ -111,6 +111,7 @@ export const resumeData = {
       description: "Parsed and analyzed 50,000+ chat messages, generating visual insights into activity trends by user and time. Automated visualization with Matplotlib/Seaborn, reducing manual analysis time by 30%.",
       techStack: ["Python", "Pandas", "Matplotlib", "Seaborn", "Data Analysis"],
       github: "https://github.com/AshuGITHUBtosh",
+      video: "/projects/data_analysis.mp4?v=2",
       demo: null,
       image: null,
       category: "Data Science"

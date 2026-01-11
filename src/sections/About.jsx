@@ -49,10 +49,10 @@ const About = () => {
         >
           <motion.div className={styles.aboutText} variants={itemVariants}>
             <p className={styles.intro}>
-              I'm a passionate <span className={styles.highlight}>AI & Robotics Engineer</span> currently pursuing my B.Tech in Computer Science & Engineering with Data Science at Vellore Institute of Technology.
+              I am a B.Tech final year student at Vellore Institute of Technology, currently pursuing Computer Science & Engineering with Data Science and also  passionate about <span className={styles.highlight}>AI & Robotics Engineer</span>.
             </p>
             <p>
-              With a strong foundation in <span className={styles.highlight}>autonomous navigation</span>, <span className={styles.highlight}>computer vision</span>, and <span className={styles.highlight}>deep learning</span>, I specialize in building intelligent systems that bridge the gap between AI research and real-world applications.
+              With a strong foundation in <span className={styles.highlight}>autonomous navigation</span>, <span className={styles.highlight}>computer vision</span>, and <span className={styles.highlight}>data analysis</span>, I specialize in building intelligent systems that bridge the gap between AI research and real-world applications.
             </p>
             <p>
               As a Senior Autonomous Member at Team Vyadh, I've engineered autonomous navigation systems using ROS and SLAM, achieving significant improvements in path efficiency and collision avoidance. My experience extends to developing CNN pipelines for document processing, achieving 92% accuracy in field extraction, and building NLP systems for sentiment analysis across global news.
@@ -62,24 +62,7 @@ const About = () => {
             </p>
           </motion.div>
 
-          <motion.div className={styles.aboutStats} variants={itemVariants}>
-            <div className={styles.statCard}>
-              <div className={styles.statNumber}>3+</div>
-              <div className={styles.statLabel}>Years Experience</div>
-            </div>
-            <div className={styles.statCard}>
-              <div className={styles.statNumber}>10+</div>
-              <div className={styles.statLabel}>Projects Completed</div>
-            </div>
-            <div className={styles.statCard}>
-              <div className={styles.statNumber}>13th</div>
-              <div className={styles.statLabel}>International Rank</div>
-            </div>
-            <div className={styles.statCard}>
-              <div className={styles.statNumber}>92%</div>
-              <div className={styles.statLabel}>Model Accuracy</div>
-            </div>
-          </motion.div>
+
 
           <motion.div className={styles.educationCard} variants={itemVariants}>
             <h3 className={styles.educationTitle}>Education</h3>

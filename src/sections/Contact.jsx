@@ -1,18 +1,27 @@
 import React, { useState, useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
+// IMPORT EMAILJS
+import emailjs from '@emailjs/browser'
 import { FiSend, FiMail, FiPhone, FiMapPin } from 'react-icons/fi'
 import { FaGithub, FaLinkedin, FaEnvelope } from 'react-icons/fa'
 import { resumeData } from '../data/resumeData'
 import styles from './Contact.module.css'
 
 const Contact = () => {
-  const ref = useRef(null)
-  const isInView = useInView(ref, { once: true, margin: '-100px' })
+  // Ref for the section animation
+  const sectionRef = useRef(null)
+  const isInView = useInView(sectionRef, { once: true, margin: '-100px' })
+  
+  // Ref for the form (Required for EmailJS)
+  const form = useRef()
+
+  // Updated state keys to match EmailJS variable names
   const [formData, setFormData] = useState({
-    name: '',
-    email: '',
+    user_name: '',
+    user_email: '',
     message: ''
   })
+  
   const [isSubmitting, setIsSubmitting] = useState(false)
 
   const handleChange = (e) => {
@@ -22,16 +31,32 @@ const Contact = () => {
     })
   }
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault()
     setIsSubmitting(true)
-    
-    // Simulate form submission (replace with actual backend integration)
-    setTimeout(() => {
-      alert('Thank you for your message! I\'ll get back to you soon.')
-      setFormData({ name: '', email: '', message: '' })
-      setIsSubmitting(false)
-    }, 1000)
+
+    // --- EMAILJS INTEGRATION ---
+    emailjs
+      .sendForm(
+        'service_5d2408v',   // Paste your Service ID here
+        'template_yw4g8km',  // Paste your Template ID here
+        form.current,
+        'qs3MSI-zukEZCgzRz'    // Paste your Public Key here
+      )
+      .then(
+        (result) => {
+          console.log('SUCCESS!', result.text)
+          alert('Message sent successfully!')
+          // Clear the form
+          setFormData({ user_name: '', user_email: '', message: '' })
+          setIsSubmitting(false)
+        },
+        (error) => {
+          console.log('FAILED...', error.text)
+          alert('Failed to send message. Please try again.')
+          setIsSubmitting(false)
+        }
+      )
   }
 
   const containerVariants = {
@@ -57,7 +82,7 @@ const Contact = () => {
   }
 
   return (
-    <section id="contact" className={styles.contact} ref={ref}>
+    <section id="contact" className={styles.contact} ref={sectionRef}>
       <div className="container">
         <motion.h2
           className="section-title"
@@ -74,6 +99,7 @@ const Contact = () => {
           initial="hidden"
           animate={isInView ? 'visible' : 'hidden'}
         >
+          {/* Left Side: Contact Info */}
           <motion.div className={styles.contactInfo} variants={itemVariants}>
             <h3 className={styles.contactInfoTitle}>Let's Connect</h3>
             <p className={styles.contactInfoText}>
@@ -152,18 +178,20 @@ const Contact = () => {
             </div>
           </motion.div>
 
+          {/* Right Side: Form */}
           <motion.form
             className={styles.contactForm}
+            ref={form} // Attach the form ref here
             onSubmit={handleSubmit}
             variants={itemVariants}
           >
             <div className={styles.formGroup}>
-              <label htmlFor="name" className={styles.formLabel}>Name</label>
+              <label htmlFor="user_name" className={styles.formLabel}>Name</label>
               <input
                 type="text"
-                id="name"
-                name="name"
-                value={formData.name}
+                id="user_name"
+                name="user_name" // Updated to match EmailJS variable
+                value={formData.user_name}
                 onChange={handleChange}
                 className={styles.formInput}
                 required
@@ -172,12 +200,12 @@ const Contact = () => {
             </div>
 
             <div className={styles.formGroup}>
-              <label htmlFor="email" className={styles.formLabel}>Email</label>
+              <label htmlFor="user_email" className={styles.formLabel}>Email</label>
               <input
                 type="email"
-                id="email"
-                name="email"
-                value={formData.email}
+                id="user_email"
+                name="user_email" // Updated to match EmailJS variable
+                value={formData.user_email}
                 onChange={handleChange}
                 className={styles.formInput}
                 required
@@ -217,4 +245,3 @@ const Contact = () => {
 }
 
 export default Contact
-
