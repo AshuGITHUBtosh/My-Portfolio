@@ -7,6 +7,7 @@ export const resumeData = {
     phone: "+91 9149051767",
     linkedin: "ashut",
     github: "AshuGITHUBtosh",
+    resumeUrl: "/resume.pdf",
     location: "Vellore, Tamil Nadu, India"
   },
   education: {

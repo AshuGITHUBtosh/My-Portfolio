@@ -36,11 +36,6 @@ const Hero = () => {
     }
   }
 
-  const downloadResume = () => {
-    // Placeholder - user can add their resume PDF
-    window.open('#', '_blank')
-  }
-
   return (
     <section id="hero" className={styles.hero}>
       <div className={styles.heroContainer}>
@@ -81,15 +76,20 @@ const Hero = () => {
               <FiArrowDown className={styles.buttonIcon} />
             </motion.button>
 
-            <motion.button
+            {/* --- UPDATED DOWNLOAD BUTTON --- */}
+            {/* We use motion.a instead of motion.button to support the 'download' attribute */}
+            <motion.a
               className={styles.secondaryButton}
-              onClick={downloadResume}
+              href={resumeData.personal.resumeUrl} // Points to /resume.pdf
+              download="Ashutosh_Bhardwaj_Resume.pdf" // Forces the file to download
+              target="_blank"
+              rel="noopener noreferrer"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
               <FiDownload className={styles.buttonIcon} />
               Download Resume
-            </motion.button>
+            </motion.a>
           </motion.div>
 
           <motion.div className={styles.socialLinks} variants={itemVariants}>
@@ -144,4 +144,3 @@ const Hero = () => {
 }
 
 export default Hero
-
