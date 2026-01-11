@@ -64,6 +64,16 @@ export const resumeData = {
         "Integrated Intel RealSense D455 to generate point cloud-based 3D maps, enabling localization accuracy within 5 cm",
         "Mentored 10+ recruits, reducing onboarding time by 40% through structured ROS training and module-based assignments"
       ],
+  images: [
+    {
+       src: "/experience/rover.jpeg", alt: "Autonomous rover",
+       src: "/experience/oritso.jpeg", alt: "SLAM map in RViz",
+       src: "/experience/nav2-path.jpeg", alt: "Nav2 path planning",
+       src: "/experience/team-testing.jpeg", alt: "Team testing rover"
+    }
+    ],
+
+
       icon: "🤖"
     },
     {
@@ -76,17 +86,24 @@ export const resumeData = {
         "Applied OCR + deep learning models (TensorFlow/Keras) to automate manual workflows, reducing cheque processing time from 10 mins to 3 mins (70% faster)",
         "Improved model robustness under noisy input by 25%, increasing real-world deployment reliability"
       ],
+      images: [
+    {
+       src: "/experience/oritso.jpeg", alt: "SLAM map in RViz",
+
+    }
+      ],
       icon: "👁️"
+
+
     }
   ],
   projects: [
     {
       title: "Autonomous Aruco-Based Navigation",
       description: "Achieved 94% detection accuracy for ArUco tags in varying lighting conditions using Python and OpenCV. Deployed model in ROS2-Gazebo to enable tag-based navigation, reducing waypoint navigation error by 35%.",
-      techStack: ["Python", "OpenCV", "ROS2", "Gazebo", "Computer Vision"],
-      github: "https://github.com/AshuGITHUBtosh",
-      demo: null,
-      image: null,
+      techStack: ["Python", "OpenCV", "ROS2", "Gazebo", "Computer Vision", "Robotics"],
+      github: "https://github.com/AshuGITHUBtosh/Aruco_PID_Navigation",
+      video: "/projects/aruco-navigation.mp4?v=2",
       category: "Robotics & Computer Vision"
     },
     {
@@ -99,34 +116,40 @@ export const resumeData = {
       category: "Data Science"
     },
     {
-      title: "TrendSage Lite - Global Sentiment Event Tracker",
-      description: "Applied custom NLP pipelines to analyze 60+ global news headlines, uncovering regional sentiment trends across 30+ countries. Designed an interactive Streamlit dashboard with user filters to visualize trends, boosting accessibility for non-technical users by 40%. Engineered a custom NER system with GeoJSON-based geolocation tagging to auto-extract 200+ country-level entities, cutting manual work by 85%.",
-      techStack: ["Python", "NLP", "Streamlit", "NER", "GeoJSON", "Sentiment Analysis"],
-      github: "https://github.com/AshuGITHUBtosh",
+      title: "Virtual Assistant",
+      description: "Created a voice-activated virtual assistant using Python that can talk and show expression according to the conversation and also performs tasks like web searches, opening applications and a face recognition feature. Integrated speech recognition and text-to-speech for seamless interaction.",
+      techStack: ["Python", "LLM", "Computer Vision"],
+      github: "https://github.com/AshuGITHUBtosh/Virtual-AI-Assistant",
+      video: "/projects/virtual assistant.mp4?v=2",
       demo: null,
       image: null,
-      category: "NLP & Data Visualization"
+      category: "AI & Automation"
     }
   ],
   achievements: [
     {
       title: "International Rover Challenge 2025",
       description: "Ranked 13th internationally among 70+ teams",
+      year: "2025",
       icon: "🏆",
-      year: "2025"
+      certificate: "/public/certificates/irc-2025.pdf"
     },
     {
       title: "International Rover Challenge 2024",
       description: "Ranked 19th internationally",
+      year: "2024",
       icon: "🏆",
-      year: "2024"
+      certificate: "/public/certificates/irc-2024.pdf"
     },
     {
       title: "NXP AIM",
       description: "Reached Regional Finals among 100+ competing teams",
+      year: "2024",
       icon: "🏆",
-      year: "2024"
+      certificate: "/certificates/nxp-aim-2024.pdf"
     }
   ]
+
+  
 };
 

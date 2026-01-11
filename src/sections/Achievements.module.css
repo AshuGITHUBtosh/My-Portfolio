@@ -31,10 +31,7 @@
 .achievementCard::before {
   content: '';
   position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
+  inset: 0;
   background: var(--gradient-primary);
   opacity: 0;
   transition: opacity var(--transition-base);
@@ -80,15 +77,28 @@
   animation: float 3s ease-in-out infinite;
 }
 
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
 .achievementContent {
   position: relative;
   z-index: 1;
+  display: flex;
+  flex-direction: column;
 }
 
 .achievementTitle {
   font-size: 1.5rem;
   font-weight: 700;
-  color: var(--text-primary);
   margin-bottom: var(--spacing-sm);
   background: var(--gradient-text);
   -webkit-background-clip: text;
@@ -105,13 +115,67 @@
 
 .achievementYear {
   display: inline-block;
+  width: fit-content;
   padding: 0.5rem 1rem;
   background: var(--gradient-primary);
   color: var(--text-primary);
   border-radius: 20px;
   font-size: 0.9rem;
   font-weight: 600;
+  margin-bottom: 1rem;
 }
+
+/* ============================= */
+/* Certificate Button Styling */
+/* ============================= */
+
+.certificateButton {
+  align-self: flex-start;
+  margin-top: 0.75rem;
+  padding: 0.5rem 1.3rem;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #6366f1, #a855f7);
+  color: #ffffff;
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  z-index: 2;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  box-shadow: 0 0 0 1px rgba(99, 102, 241, 0.4);
+}
+
+
+.certificateButton::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, #a855f7, #6366f1);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.certificateButton:hover::before {
+  opacity: 1;
+}
+
+.certificateButton:hover {
+  margin-top: 0.75rem;
+  z-index: 2;
+  border: 1px solid rgba(217, 13, 13, 0.404);
+  box-shadow: 0 0 0 1px rgba(7, 217, 28, 0.4);
+}
+
+.certificateButton span {
+  position: relative;
+  z-index: 1;
+}
+
+/* ============================= */
+/* Responsive */
+/* ============================= */
 
 @media (max-width: 768px) {
   .achievementsGrid {
@@ -126,4 +190,3 @@
     font-size: 3rem;
   }
 }
-

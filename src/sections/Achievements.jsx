@@ -53,8 +53,8 @@ const Achievements = () => {
               key={index}
               className={styles.achievementCard}
               variants={cardVariants}
-              whileHover={{ 
-                scale: 1.05, 
+              whileHover={{
+                scale: 1.05,
                 y: -10,
                 rotateY: 5,
                 boxShadow: '0 20px 40px rgba(99, 102, 241, 0.3)'
@@ -62,11 +62,35 @@ const Achievements = () => {
               style={{ perspective: 1000 }}
             >
               <div className={styles.cardGlow}></div>
-              <div className={styles.achievementIcon}>{achievement.icon}</div>
+
+              <div className={styles.achievementIcon}>
+                {achievement.icon}
+              </div>
+
               <div className={styles.achievementContent}>
-                <h3 className={styles.achievementTitle}>{achievement.title}</h3>
-                <p className={styles.achievementDescription}>{achievement.description}</p>
-                <span className={styles.achievementYear}>{achievement.year}</span>
+                <h3 className={styles.achievementTitle}>
+                  {achievement.title}
+                </h3>
+
+                <p className={styles.achievementDescription}>
+                  {achievement.description}
+                </p>
+
+                <span className={styles.achievementYear}>
+                  {achievement.year}
+                </span>
+
+                {/* Certificate Button */}
+                {achievement.certificate && (
+                  <a
+                    href={achievement.certificate}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={styles.certificateButton}
+                  >
+                    <span>View Certificate</span>
+                  </a>
+                )}
               </div>
             </motion.div>
           ))}
@@ -77,4 +101,3 @@ const Achievements = () => {
 }
 
 export default Achievements
-
