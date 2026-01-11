@@ -1,3 +1,5 @@
+/* src/index.css */
+
 * {
   margin: 0;
   padding: 0;
@@ -5,17 +7,24 @@
 }
 
 :root {
-  /* Dark Mode Colors */
+  /* --- FORCED DARK MODE PALETTE --- */
+  /* Backgrounds: Deep Dark Blue/Black */
   --bg-primary: #0a0a0f;
   --bg-secondary: #111118;
   --bg-tertiary: #1a1a24;
+  
+  /* Text: Pure White & Light Greys */
   --text-primary: #ffffff;
   --text-secondary: #b4b4c4;
   --text-tertiary: #8a8a9a;
+  
+  /* Accents */
   --accent-primary: #6366f1;
   --accent-secondary: #8b5cf6;
   --accent-tertiary: #ec4899;
   --accent-glow: rgba(99, 102, 241, 0.3);
+  
+  /* UI Elements */
   --border-color: rgba(255, 255, 255, 0.1);
   --card-bg: rgba(26, 26, 36, 0.6);
   --glass-bg: rgba(255, 255, 255, 0.05);
@@ -51,12 +60,14 @@
 html {
   scroll-behavior: smooth;
   overflow-x: hidden;
+  /* CRITICAL FIX: Tells browser to render scrollbars & defaults in dark mode */
+  color-scheme: dark; 
 }
 
 body {
   font-family: var(--font-primary);
-  background: var(--bg-primary);
-  color: var(--text-primary);
+  background-color: var(--bg-primary); /* Force background color */
+  color: var(--text-primary);          /* Force text color */
   line-height: 1.6;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
@@ -93,19 +104,12 @@ h1, h2, h3, h4, h5, h6 {
   font-weight: 700;
   line-height: 1.2;
   margin-bottom: var(--spacing-sm);
+  color: var(--text-primary); /* Ensure headings inherit white */
 }
 
-h1 {
-  font-size: clamp(2.5rem, 5vw, 4.5rem);
-}
-
-h2 {
-  font-size: clamp(2rem, 4vw, 3.5rem);
-}
-
-h3 {
-  font-size: clamp(1.5rem, 3vw, 2.5rem);
-}
+h1 { font-size: clamp(2.5rem, 5vw, 4.5rem); }
+h2 { font-size: clamp(2rem, 4vw, 3.5rem); }
+h3 { font-size: clamp(1.5rem, 3vw, 2.5rem); }
 
 p {
   font-size: clamp(1rem, 1.5vw, 1.125rem);
@@ -157,6 +161,8 @@ button {
   text-align: center;
   margin-bottom: var(--spacing-lg);
   position: relative;
+  /* Fallback color if gradient fails to load */
+  color: var(--text-primary); 
 }
 
 .section-title::after {
@@ -182,43 +188,23 @@ button {
 
 /* Animations */
 @keyframes float {
-  0%, 100% {
-    transform: translateY(0px);
-  }
-  50% {
-    transform: translateY(-20px);
-  }
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-20px); }
 }
 
 @keyframes glow {
-  0%, 100% {
-    box-shadow: 0 0 20px var(--accent-glow);
-  }
-  50% {
-    box-shadow: 0 0 30px var(--accent-glow), 0 0 40px var(--accent-glow);
-  }
+  0%, 100% { box-shadow: 0 0 20px var(--accent-glow); }
+  50% { box-shadow: 0 0 30px var(--accent-glow), 0 0 40px var(--accent-glow); }
 }
 
 @keyframes gradient-shift {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
 
 /* Responsive */
 @media (max-width: 768px) {
-  .section {
-    padding: var(--spacing-lg) 0;
-  }
-  
-  .container {
-    padding: 0 var(--spacing-sm);
-  }
+  .section { padding: var(--spacing-lg) 0; }
+  .container { padding: 0 var(--spacing-sm); }
 }
-
