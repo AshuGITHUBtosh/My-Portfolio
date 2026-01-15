@@ -5,7 +5,7 @@ export const resumeData = {
     tagline: "Building autonomous systems and intelligent solutions at the intersection of AI, Computer Vision, and Robotics",
     email: "ashutosh10503@gmail.com",
     phone: "+91 9149051767",
-    linkedin: "ashut",
+    linkedin: "https://www.linkedin.com/in/ashutosh-bhardwaj-/", // Fixed incomplete link
     github: "AshuGITHUBtosh",
     resumeUrl: "/resume.pdf",
     location: "Vellore, Tamil Nadu, India"
@@ -65,16 +65,13 @@ export const resumeData = {
         "Worked with ROS and sensors like LIDAR, IMU, depth Camera to implement SLAM and Nav2 stack for autonomous navigation in unstructured terrains",
         "Mentored 10+ recruits, reducing onboarding time by 40% through structured ROS training and module-based assignments"
       ],
-  images: [
-    {
-       src: "/experience/rover.jpeg", alt: "Autonomous rover",
-       src: "/experience/oritso.jpeg", alt: "SLAM map in RViz",
-       src: "/experience/nav2-path.jpeg", alt: "Nav2 path planning",
-       src: "/experience/team-testing.jpeg", alt: "Team testing rover"
-    }
-    ],
-
-
+      // FIXED: Separated images into individual objects
+      images: [
+        { src: "/experience/rover.jpeg", alt: "Autonomous rover" },
+        { src: "/experience/turtlebot.jpg", alt: "SLAM map in RViz" },
+        { src: "/experience/me_and_rover.jpeg", alt: "Nav2 path planning" },
+        { src: "/experience/team_photo.JPG", alt: "Team testing rover" }
+      ],
       icon: "🤖"
     },
     {
@@ -88,14 +85,9 @@ export const resumeData = {
         "Improved model robustness under noisy input by 25%, increasing real-world deployment reliability"
       ],
       images: [
-    {
-       src: "/experience/oritso.jpeg", alt: "SLAM map in RViz",
-
-    }
+        { src: "/experience/oritso.jpeg", alt: "Cheque Processing Pipeline" }
       ],
       icon: "👁️"
-
-
     }
   ],
   projects: [
@@ -104,7 +96,7 @@ export const resumeData = {
       description: "Achieved 94% detection accuracy for ArUco tags in varying lighting conditions using Python and OpenCV. Deployed model in ROS2-Gazebo to enable tag-based navigation, reducing waypoint navigation error by 35%.",
       techStack: ["Python", "OpenCV", "ROS2", "Gazebo", "Computer Vision", "Robotics"],
       github: "https://github.com/AshuGITHUBtosh/Aruco_PID_Navigation",
-      video: "/projects/aruco-navigation.mp4?v=2",
+      video: "/projects/aruco-navigation.mp4",
       category: "Robotics & Computer Vision"
     },
     {
@@ -112,7 +104,7 @@ export const resumeData = {
       description: "Parsed and analyzed 50,000+ chat messages, generating visual insights into activity trends by user and time. Automated visualization with Matplotlib/Seaborn, reducing manual analysis time by 30%.",
       techStack: ["Python", "Pandas", "Matplotlib", "Seaborn", "Data Analysis"],
       github: "https://github.com/AshuGITHUBtosh",
-      video: "/projects/data_analysis.mp4?v=2",
+      video: "/projects/data_analysis.mp4",
       demo: null,
       image: null,
       category: "Data Science"
@@ -122,7 +114,7 @@ export const resumeData = {
       description: "Created a voice-activated virtual assistant using Python that can talk and show expression according to the conversation and also performs tasks like web searches, opening applications and a face recognition feature. Integrated speech recognition and text-to-speech for seamless interaction.",
       techStack: ["Python", "LLM", "Computer Vision"],
       github: "https://github.com/AshuGITHUBtosh/Virtual-AI-Assistant",
-      video: "/projects/virtual assistant.mp4?v=2",
+      video: "/projects/virtual assistant.mp4",
       demo: null,
       image: null,
       category: "AI & Automation"
@@ -134,24 +126,27 @@ export const resumeData = {
       description: "Ranked 13th internationally among 70+ teams",
       year: "2025",
       icon: "🏆",
-      certificate: "/public/certificates/irc-2025.pdf"
+      // FIXED: Point to IMAGE (.png/.jpg), NOT .pdf
+      certificate: "/certificates/irc-2025.png",
+      thumbnail: "/certificates/irc-2025.png"
     },
     {
       title: "International Rover Challenge 2024",
       description: "Ranked 19th internationally",
       year: "2024",
       icon: "🏆",
-      certificate: "/public/certificates/irc-2024.pdf"
+      // FIXED: Point to IMAGE (.png/.jpg), NOT .pdf
+      certificate: "/certificates/irc-2024.png",
+      thumbnail: "/certificates/irc-2024.png"
     },
     {
       title: "NXP AIM",
       description: "Reached Regional Finals among 100+ competing teams",
       year: "2024",
       icon: "🏆",
-      certificate: "/certificates/nxp-aim-2024.pdf"
+      // FIXED: Point to IMAGE (.png/.jpg), NOT .pdf
+      certificate: "/certificates/nxp-aim-2024.png",
+      thumbnail: "/certificates/nxp-aim-2024.png"
     }
   ]
-
-  
 };
-

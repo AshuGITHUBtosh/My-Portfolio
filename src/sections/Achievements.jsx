@@ -1,101 +1,128 @@
-import React, { useRef } from 'react'
-import { motion, useInView } from 'framer-motion'
+import React, { useRef, useState } from 'react'
+import { motion, useInView, AnimatePresence } from 'framer-motion'
+import { FiAward, FiX } from 'react-icons/fi'
 import { resumeData } from '../data/resumeData'
 import styles from './Achievements.module.css'
 
 const Achievements = () => {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: '-100px' })
+  
+  // State to track which image is currently enlarged
+  const [selectedImage, setSelectedImage] = useState(null)
 
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
-      transition: {
-        staggerChildren: 0.15
-      }
+      transition: { staggerChildren: 0.1 }
     }
   }
 
   const cardVariants = {
-    hidden: { opacity: 0, y: 50, rotateX: -15 },
+    hidden: { opacity: 0, y: 30 },
     visible: {
       opacity: 1,
       y: 0,
-      rotateX: 0,
-      transition: {
-        duration: 0.6,
-        ease: 'easeOut'
-      }
+      transition: { duration: 0.5 }
     }
+  }
+
+  // Animation for the modal pop-up
+  const modalVariants = {
+    hidden: { opacity: 0, scale: 0.5 },
+    visible: { opacity: 1, scale: 1, transition: { type: "spring", stiffness: 300, damping: 25 } },
+    exit: { opacity: 0, scale: 0.5, transition: { duration: 0.2 } }
   }
 
   return (
     <section id="achievements" className={styles.achievements} ref={ref}>
       <div className="container">
-        <motion.h2
+        <motion.h2 
           className="section-title"
-          initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-          transition={{ duration: 0.6 }}
+          initial={{ opacity: 0, y: 20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
         >
-          Achievements & Awards
+          Achievements
         </motion.h2>
 
-        <motion.div
+        <motion.div 
           className={styles.achievementsGrid}
           variants={containerVariants}
           initial="hidden"
           animate={isInView ? 'visible' : 'hidden'}
         >
-          {resumeData.achievements.map((achievement, index) => (
-            <motion.div
-              key={index}
+          {resumeData.achievements.map((item, index) => (
+            <motion.div 
+              key={index} 
               className={styles.achievementCard}
               variants={cardVariants}
-              whileHover={{
-                scale: 1.05,
-                y: -10,
-                rotateY: 5,
-                boxShadow: '0 20px 40px rgba(99, 102, 241, 0.3)'
-              }}
-              style={{ perspective: 1000 }}
+              whileHover={{ y: -10 }}
             >
-              <div className={styles.cardGlow}></div>
-
-              <div className={styles.achievementIcon}>
-                {achievement.icon}
+              <div className={styles.iconWrapper}>
+                <FiAward />
               </div>
-
-              <div className={styles.achievementContent}>
-                <h3 className={styles.achievementTitle}>
-                  {achievement.title}
-                </h3>
-
-                <p className={styles.achievementDescription}>
-                  {achievement.description}
-                </p>
-
-                <span className={styles.achievementYear}>
-                  {achievement.year}
-                </span>
-
-                {/* Certificate Button */}
-                {achievement.certificate && (
-                  <a
-                    href={achievement.certificate}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className={styles.certificateButton}
+              <h3 className={styles.cardTitle}>{item.title}</h3>
+              <p className={styles.cardDescription}>{item.description}</p>
+              
+              <div className={styles.cardFooter}>
+                <span className={styles.yearBadge}>{item.year}</span>
+                
+                {/* THUMBNAIL: Only shows if 'certificate' exists in data */}
+                {item.certificate && (
+                  <motion.div 
+                    className={styles.thumbnailContainer}
+                    onClick={() => setSelectedImage(item.certificate)}
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    title="Click to enlarge"
                   >
-                    <span>View Certificate</span>
-                  </a>
+                    <img 
+                      src={item.certificate} 
+                      alt="Certificate Thumbnail" 
+                      className={styles.thumbnailImage}
+                    />
+                  </motion.div>
                 )}
               </div>
             </motion.div>
           ))}
         </motion.div>
       </div>
+
+      {/* --- ENLARGED IMAGE MODAL --- */}
+      <AnimatePresence>
+        {selectedImage && (
+          <motion.div 
+            className={styles.modalOverlay}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setSelectedImage(null)} // Click outside to close
+          >
+            {/* Close Button */}
+            <button className={styles.closeButton} onClick={() => setSelectedImage(null)}>
+              <FiX />
+            </button>
+
+            {/* The Enlarged Image */}
+            <motion.div 
+              className={styles.modalContent}
+              variants={modalVariants}
+              initial="hidden"
+              animate="visible"
+              exit="exit"
+              onClick={(e) => e.stopPropagation()} // Clicking image doesn't close it
+            >
+              <img 
+                src={selectedImage} 
+                alt="Certificate Enlarged" 
+                className={styles.fullImage}
+              />
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </section>
   )
 }

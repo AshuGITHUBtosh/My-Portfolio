@@ -1,147 +1,159 @@
-.about {
-  min-height: 100vh;
+/* src/sections/Achievements/Achievements.module.css */
+
+.achievements {
   padding: var(--spacing-xl) 0;
   position: relative;
+}
+
+.achievementsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  margin-top: var(--spacing-lg);
+}
+
+.achievementCard {
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 20px;
+  padding: 2rem;
+  backdrop-filter: blur(10px);
+  transition: all var(--transition-base);
+  display: flex;
+  flex-direction: column;
+}
+
+.achievementCard:hover {
+  border-color: var(--accent-primary);
+  box-shadow: var(--shadow-glow);
+  transform: translateY(-5px);
+}
+
+.iconWrapper {
+  width: 50px;
+  height: 50px;
+  border-radius: 12px;
+  background: rgba(99, 102, 241, 0.1);
+  color: var(--accent-primary);
   display: flex;
   align-items: center;
-}
-
-.aboutContent {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: var(--spacing-lg);
-  max-width: 1000px;
-  margin: 0 auto;
-}
-
-.aboutText {
-  background: var(--card-bg);
-  backdrop-filter: blur(10px);
-  padding: var(--spacing-lg);
-  border-radius: 20px;
-  border: 1px solid var(--border-color);
-}
-
-.intro {
-  font-size: 1.25rem;
-  font-weight: 500;
-  color: var(--text-primary);
-  margin-bottom: var(--spacing-md);
-  line-height: 1.8;
-}
-
-.highlight {
-  background: var(--gradient-text);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  font-weight: 600;
-}
-
-.aboutText p {
-  margin-bottom: var(--spacing-md);
-  line-height: 1.8;
-  font-size: 1.05rem;
-}
-
-.aboutStats {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-  gap: var(--spacing-md);
-}
-
-.statCard {
-  background: var(--card-bg);
-  backdrop-filter: blur(10px);
-  padding: var(--spacing-md);
-  border-radius: 16px;
-  border: 1px solid var(--border-color);
-  text-align: center;
-  transition: all var(--transition-base);
-}
-
-.statCard:hover {
-  transform: translateY(-5px);
-  border-color: var(--accent-primary);
-  box-shadow: var(--shadow-glow);
-}
-
-.statNumber {
-  font-size: 2.5rem;
-  font-weight: 800;
-  background: var(--gradient-text);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  margin-bottom: var(--spacing-xs);
-}
-
-.statLabel {
-  font-size: 0.9rem;
-  color: var(--text-secondary);
-  font-weight: 500;
-}
-
-.educationCard {
-  background: var(--card-bg);
-  backdrop-filter: blur(10px);
-  padding: var(--spacing-lg);
-  border-radius: 20px;
-  border: 1px solid var(--border-color);
-  transition: all var(--transition-base);
-}
-
-.educationCard:hover {
-  transform: translateY(-5px);
-  border-color: var(--accent-primary);
-  box-shadow: var(--shadow-glow);
-}
-
-.educationTitle {
+  justify-content: center;
   font-size: 1.5rem;
-  margin-bottom: var(--spacing-md);
-  background: var(--gradient-text);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  margin-bottom: 1.5rem;
 }
 
-.institution {
+.cardTitle {
   font-size: 1.25rem;
+  margin-bottom: 0.75rem;
   color: var(--text-primary);
-  margin-bottom: var(--spacing-xs);
 }
 
-.degree {
+.cardDescription {
   color: var(--text-secondary);
-  margin-bottom: var(--spacing-sm);
-  font-size: 1.05rem;
+  margin-bottom: 1.5rem;
+  flex-grow: 1; 
 }
 
-.educationDetails {
+.cardFooter {
   display: flex;
-  gap: var(--spacing-md);
-  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
 }
 
-.graduationDate,
-.cgpa {
-  padding: 0.5rem 1rem;
-  background: var(--glass-bg);
+.yearBadge {
+  padding: 0.4rem 1rem;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 20px;
+  font-size: 0.875rem;
+  color: var(--text-tertiary);
+  border: 1px solid var(--border-color);
+}
+
+/* --- THUMBNAIL STYLES (The small preview) --- */
+.thumbnailContainer {
+  width: 80px;  /* Small width */
+  height: 50px; /* Small height */
   border-radius: 8px;
-  font-size: 0.9rem;
-  color: var(--accent-primary);
-  font-weight: 500;
+  overflow: hidden;
+  cursor: pointer;
+  border: 2px solid var(--border-color);
+  transition: all var(--transition-base);
+  position: relative;
+}
+
+.thumbnailContainer:hover {
+  border-color: var(--accent-primary);
+  transform: scale(1.1);
+  box-shadow: 0 0 15px rgba(0,0,0,0.5);
+}
+
+.thumbnailImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Zooms in to fill the small box */
+}
+
+/* --- MODAL STYLES (The enlarged view) --- */
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.9);
+  backdrop-filter: blur(8px);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  cursor: zoom-out; /* Hint that clicking closes it */
+}
+
+.modalContent {
+  position: relative;
+  max-width: 90vw;
+  max-height: 90vh;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 0 50px rgba(0,0,0,0.5);
+}
+
+.fullImage {
+  display: block;
+  max-width: 100%;
+  max-height: 90vh;
+  object-fit: contain; /* Ensures the whole image is visible */
+}
+
+.closeButton {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: rgba(0,0,0,0.6);
+  color: white;
+  border: 1px solid rgba(255,255,255,0.2);
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  cursor: pointer;
+  z-index: 1001;
+  transition: all 0.2s;
+}
+
+.closeButton:hover {
+  background: var(--accent-primary);
 }
 
 @media (max-width: 768px) {
-  .aboutStats {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  .aboutText,
-  .educationCard {
-    padding: var(--spacing-md);
+  .cardFooter {
+    gap: 1rem;
   }
 }
-
