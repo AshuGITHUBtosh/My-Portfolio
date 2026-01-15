@@ -25,10 +25,18 @@ const Navigation = ({ activeSection, darkMode, setDarkMode }) => {
     { id: 'contact', label: 'Contact' }
   ]
 
+  // --- 🛠️ FIX: Robust Scroll Function ---
   const scrollToSection = (sectionId) => {
     const element = document.getElementById(sectionId)
     if (element) {
-      element.scrollIntoView({ behavior: 'smooth', block: 'start' })
+      // 1. Calculate precise position with offset for fixed header
+      const yOffset = -70; 
+      const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
+      
+      // 2. Use window.scrollTo (more reliable on mobile than scrollIntoView)
+      window.scrollTo({ top: y, behavior: 'smooth' });
+      
+      // 3. Close menu immediately
       setIsMobileMenuOpen(false)
     }
   }
@@ -50,6 +58,7 @@ const Navigation = ({ activeSection, darkMode, setDarkMode }) => {
           <span className={styles.logoText}>AB</span>
         </motion.div>
 
+        {/* Desktop Menu */}
         <ul className={styles.navList}>
           {navItems.map((item, index) => (
             <motion.li
@@ -68,6 +77,7 @@ const Navigation = ({ activeSection, darkMode, setDarkMode }) => {
           ))}
         </ul>
 
+        {/* Actions (Theme & Menu Toggle) */}
         <div className={styles.navActions}>
           <motion.button
             className={styles.themeToggle}
@@ -90,28 +100,35 @@ const Navigation = ({ activeSection, darkMode, setDarkMode }) => {
         </div>
       </div>
 
+      {/* --- 📱 MOBILE MENU FIX --- */}
       <motion.div
         className={styles.mobileMenu}
         initial={false}
         animate={{
-          height: isMobileMenuOpen ? 'auto' : 0,
-          opacity: isMobileMenuOpen ? 1 : 0
+          height: isMobileMenuOpen ? '100vh' : 0,
+          opacity: isMobileMenuOpen ? 1 : 0,
+          // CRITICAL FIX: Disable pointer events when closed so clicks go through
+          pointerEvents: isMobileMenuOpen ? 'auto' : 'none' 
         }}
         transition={{ duration: 0.3 }}
       >
-        {navItems.map((item) => (
-          <button
-            key={item.id}
-            className={`${styles.mobileNavLink} ${activeSection === item.id ? styles.active : ''}`}
-            onClick={() => scrollToSection(item.id)}
-          >
-            {item.label}
-          </button>
-        ))}
+        <div className={styles.mobileMenuContent}>
+          {navItems.map((item) => (
+            <button
+              key={item.id}
+              className={`${styles.mobileNavLink} ${activeSection === item.id ? styles.active : ''}`}
+              onClick={(e) => {
+                e.preventDefault();
+                scrollToSection(item.id);
+              }}
+            >
+              {item.label}
+            </button>
+          ))}
+        </div>
       </motion.div>
     </motion.nav>
   )
 }
 
 export default Navigation
-

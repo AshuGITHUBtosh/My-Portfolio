@@ -50,8 +50,8 @@ export const resumeData = {
     ],
     tools: [
       { name: "Git", level: 95 },
-      { name: "GitHub", level: 95 },
-      { name: "Image Pre-processing", level: 90 }
+      { name: "GitHub", level: 95 }
+      
     ]
   },
   experience: [
