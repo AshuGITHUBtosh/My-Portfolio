@@ -1,144 +1,85 @@
-import React from 'react'
+import React, { Suspense } from 'react'
 import { motion } from 'framer-motion'
-import { FiDownload, FiArrowDown } from 'react-icons/fi'
-import { FaGithub, FaLinkedin, FaEnvelope } from 'react-icons/fa'
-import { resumeData } from '../data/resumeData'
+import { Canvas } from '@react-three/fiber'
+import RoverScene from '../components/RoverModel' // Ensure this path is correct based on your folder structure
 import styles from './Hero.module.css'
 
 const Hero = () => {
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.2,
-        delayChildren: 0.3
-      }
-    }
-  }
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 30 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.6,
-        ease: 'easeOut'
-      }
-    }
-  }
-
-  const scrollToProjects = () => {
-    const element = document.getElementById('projects')
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth', block: 'start' })
-    }
-  }
-
   return (
     <section id="hero" className={styles.hero}>
-      <div className={styles.heroContainer}>
-        <motion.div
-          className={styles.heroContent}
-          variants={containerVariants}
-          initial="hidden"
-          animate="visible"
-        >
-          <motion.div className={styles.greeting} variants={itemVariants}>
-            <span className={styles.greetingText}>Hello, I'm</span>
-          </motion.div>
-
-          <motion.h1 className={styles.name} variants={itemVariants}>
-            {resumeData.personal.name.split(' ').map((word, index) => (
-              <span key={index} className={styles.nameWord}>
-                {word}{' '}
-              </span>
-            ))}
+      <div className={styles.container}>
+        
+        {/* --- LEFT SIDE: TEXT CONTENT --- */}
+        <div className={styles.content}>
+          <motion.p 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className={styles.greeting}
+          >
+            HELLO, I'M
+          </motion.p>
+          
+          <motion.h1 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.1, duration: 0.5 }}
+            className={styles.name}
+          >
+            Ashutosh <br /> Bhardwaj
           </motion.h1>
 
-          <motion.h2 className={styles.title} variants={itemVariants}>
-            {resumeData.personal.title}
+          <motion.h2 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2, duration: 0.5 }}
+            className={styles.title}
+          >
+            AI & Robotics Engineer
           </motion.h2>
 
-          <motion.p className={styles.tagline} variants={itemVariants}>
-            {resumeData.personal.tagline}
+          <motion.p 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.3, duration: 0.5 }}
+            className={styles.description}
+          >
+            Building autonomous systems and intelligent solutions at the intersection of AI, Computer Vision, and Robotics.
           </motion.p>
 
-          <motion.div className={styles.ctaButtons} variants={itemVariants}>
-            <motion.button
-              className={styles.primaryButton}
-              onClick={scrollToProjects}
-              whileHover={{ scale: 1.05, boxShadow: '0 0 30px rgba(99, 102, 241, 0.5)' }}
-              whileTap={{ scale: 0.95 }}
-            >
-              View Projects
-              <FiArrowDown className={styles.buttonIcon} />
-            </motion.button>
-
-            {/* --- UPDATED DOWNLOAD BUTTON --- */}
-            {/* We use motion.a instead of motion.button to support the 'download' attribute */}
-            <motion.a
-              className={styles.secondaryButton}
-              href={resumeData.personal.resumeUrl} // Points to /resume.pdf
-              download="Ashutosh_Bhardwaj_Resume.pdf" // Forces the file to download
-              target="_blank"
-              rel="noopener noreferrer"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              <FiDownload className={styles.buttonIcon} />
-              Download Resume
-            </motion.a>
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.4, duration: 0.5 }}
+            className={styles.buttons}
+          >
+            <a href="#projects" className={styles.primaryBtn}>View Projects</a>
+            {/* Make sure resume.pdf is in your public folder */}
+            <a href="/resume.pdf" target="_blank" rel="noopener noreferrer" className={styles.secondaryBtn}>Download Resume</a>
           </motion.div>
+        </div>
 
-          <motion.div className={styles.socialLinks} variants={itemVariants}>
-            <motion.a
-              href={`https://github.com/${resumeData.personal.github}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={styles.socialLink}
-              whileHover={{ scale: 1.2, y: -5 }}
-              whileTap={{ scale: 0.9 }}
-            >
-              <FaGithub />
-            </motion.a>
-            <motion.a
-              href={`https://linkedin.com/in/${resumeData.personal.linkedin.toLowerCase().replace(/\s+/g, '-')}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={styles.socialLink}
-              whileHover={{ scale: 1.2, y: -5 }}
-              whileTap={{ scale: 0.9 }}
-            >
-              <FaLinkedin />
-            </motion.a>
-            <motion.a
-              href={`mailto:${resumeData.personal.email}`}
-              className={styles.socialLink}
-              whileHover={{ scale: 1.2, y: -5 }}
-              whileTap={{ scale: 0.9 }}
-            >
-              <FaEnvelope />
-            </motion.a>
+        {/* --- RIGHT SIDE: 3D MODEL --- */}
+        <div className={styles.modelContainer}>
+          {/* Canvas is the window into the 3D world */}
+          <Canvas dpr={[1, 2]} camera={{ position: [0, 0, 5], fov: 45 }}>
+            <Suspense fallback={null}>
+              <RoverScene />
+            </Suspense>
+          </Canvas>
+          
+          {/* User Hint */}
+          <motion.div 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 1, duration: 1 }}
+            className={styles.interactionHint}
+          >
+            <span>🖱️ Drag to Rotate | 📜 Scroll to Zoom</span>
           </motion.div>
-        </motion.div>
+        </div>
 
-        <motion.div
-          className={styles.scrollIndicator}
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 1.5, repeat: Infinity, repeatType: 'reverse', duration: 1.5 }}
-          onClick={() => {
-            document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' })
-          }}
-        >
-          <FiArrowDown />
-        </motion.div>
       </div>
-
-      <div className={styles.gradientOrb1}></div>
-      <div className={styles.gradientOrb2}></div>
     </section>
   )
 }
