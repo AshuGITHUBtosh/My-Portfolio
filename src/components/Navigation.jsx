@@ -1,16 +1,33 @@
 import React, { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
-import { FiMenu, FiX, FiMoon, FiSun } from 'react-icons/fi'
+import { FiMenu, FiX } from 'react-icons/fi' // 🧹 REMOVED: Sun/Moon Icons
 import styles from './Navigation.module.css'
 
-const Navigation = ({ activeSection, darkMode, setDarkMode }) => {
+const Navigation = () => { // 🧹 REMOVED: Props
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const [activeSection, setActiveSection] = useState('hero')
 
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50)
+
+      // Active Section Logic
+      const sections = ['hero', 'about', 'skills', 'projects', 'experience', 'achievements', 'contact']
+      const scrollPosition = window.scrollY + 300 
+
+      for (const section of sections) {
+        const element = document.getElementById(section)
+        if (element) {
+          const { offsetTop, offsetHeight } = element
+          if (scrollPosition >= offsetTop && scrollPosition < offsetTop + offsetHeight) {
+            setActiveSection(section)
+            break
+          }
+        }
+      }
     }
+
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
@@ -25,18 +42,12 @@ const Navigation = ({ activeSection, darkMode, setDarkMode }) => {
     { id: 'contact', label: 'Contact' }
   ]
 
-  // --- 🛠️ FIX: Robust Scroll Function ---
   const scrollToSection = (sectionId) => {
     const element = document.getElementById(sectionId)
     if (element) {
-      // 1. Calculate precise position with offset for fixed header
       const yOffset = -70; 
       const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
-      
-      // 2. Use window.scrollTo (more reliable on mobile than scrollIntoView)
       window.scrollTo({ top: y, behavior: 'smooth' });
-      
-      // 3. Close menu immediately
       setIsMobileMenuOpen(false)
     }
   }
@@ -77,17 +88,9 @@ const Navigation = ({ activeSection, darkMode, setDarkMode }) => {
           ))}
         </ul>
 
-        {/* Actions (Theme & Menu Toggle) */}
+        {/* Actions */}
         <div className={styles.navActions}>
-          <motion.button
-            className={styles.themeToggle}
-            onClick={() => setDarkMode(!darkMode)}
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.9 }}
-            aria-label="Toggle theme"
-          >
-            {darkMode ? <FiSun size={20} /> : <FiMoon size={20} />}
-          </motion.button>
+          {/* 🧹 REMOVED: Theme Toggle Button was here */}
 
           <motion.button
             className={styles.mobileMenuButton}
@@ -100,14 +103,13 @@ const Navigation = ({ activeSection, darkMode, setDarkMode }) => {
         </div>
       </div>
 
-      {/* --- 📱 MOBILE MENU FIX --- */}
+      {/* Mobile Menu */}
       <motion.div
         className={styles.mobileMenu}
         initial={false}
         animate={{
           height: isMobileMenuOpen ? '100vh' : 0,
           opacity: isMobileMenuOpen ? 1 : 0,
-          // CRITICAL FIX: Disable pointer events when closed so clicks go through
           pointerEvents: isMobileMenuOpen ? 'auto' : 'none' 
         }}
         transition={{ duration: 0.3 }}
