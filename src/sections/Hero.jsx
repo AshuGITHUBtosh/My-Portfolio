@@ -1,15 +1,31 @@
 import React, { Suspense } from 'react'
 import { motion } from 'framer-motion'
 import { Canvas } from '@react-three/fiber'
-import RoverScene from '../components/RoverModel' // Ensure this path is correct based on your folder structure
+import { Html, useProgress } from '@react-three/drei' // 👈 Import these
+import RoverScene from '../components/RoverModel'
 import styles from './Hero.module.css'
+
+// --- 1. NEW LOADER COMPONENT ---
+function CanvasLoader() {
+  const { progress } = useProgress()
+  return (
+    <Html center>
+      <div style={{ color: 'white', textAlign: 'center' }}>
+        <span style={{ fontSize: '1.5rem', fontWeight: 'bold' }}>
+          {progress.toFixed(0)}%
+        </span>
+        <p style={{ fontSize: '0.8rem', opacity: 0.8 }}>Loading Rover...</p>
+      </div>
+    </Html>
+  )
+}
 
 const Hero = () => {
   return (
     <section id="hero" className={styles.hero}>
       <div className={styles.container}>
         
-        {/* --- LEFT SIDE: TEXT CONTENT --- */}
+        {/* Left Side: Text */}
         <div className={styles.content}>
           <motion.p 
             initial={{ opacity: 0, y: 20 }}
@@ -54,21 +70,19 @@ const Hero = () => {
             className={styles.buttons}
           >
             <a href="#projects" className={styles.primaryBtn}>View Projects</a>
-            {/* Make sure resume.pdf is in your public folder */}
             <a href="/resume.pdf" target="_blank" rel="noopener noreferrer" className={styles.secondaryBtn}>Download Resume</a>
           </motion.div>
         </div>
 
-        {/* --- RIGHT SIDE: 3D MODEL --- */}
+        {/* Right Side: 3D Model */}
         <div className={styles.modelContainer}>
-          {/* Canvas is the window into the 3D world */}
           <Canvas dpr={[1, 2]} camera={{ position: [0, 0, 5], fov: 45 }}>
-            <Suspense fallback={null}>
+            {/* 2. USE THE LOADER HERE */}
+            <Suspense fallback={<CanvasLoader />}>
               <RoverScene />
             </Suspense>
           </Canvas>
           
-          {/* User Hint */}
           <motion.div 
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
