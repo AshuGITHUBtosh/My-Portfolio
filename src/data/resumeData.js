@@ -14,7 +14,7 @@ export const resumeData = {
     institution: "Vellore Institute of Technology",
     degree: "B.Tech in Computer Science & Engineering (Data Science)",
     graduationDate: "May 2026",
-    cgpa: "7.6",
+    cgpa: "8.1",
     location: "Vellore, Tamil Nadu"
   },
   skills: {
