@@ -147,6 +147,15 @@ export const resumeData = {
       // FIXED: Point to IMAGE (.png/.jpg), NOT .pdf
       certificate: "/certificates/nxp-aim-2024.png",
       thumbnail: "/certificates/nxp-aim-2024.png"
+    },
+    {
+      title: "E-yantra Robotics Competition by IIT Bombay",
+      description: "Participated in the prestigious E-yantra Robotics Competition, showcasing skills in robotics and automation. Reached the final stages of the competition, demonstrating proficiency in robot design, programming, and problem-solving.",
+      year: "2025",
+      icon: "🏆",
+      // FIXED: Point to IMAGE (.png/.jpg), NOT .pdf
+      certificate: "/certificates/eyantra-2025.png",
+      thumbnail: "/certificates/eyantra-2025.png"
     }
   ]
 };
