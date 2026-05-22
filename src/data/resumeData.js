@@ -91,6 +91,7 @@ export const resumeData = {
     }
   ],
   projects: [
+
     {
       title: "Autonomous Aruco-Based Navigation",
       description: "Achieved 94% detection accuracy for ArUco tags in varying lighting conditions using Python and OpenCV. Deployed model in ROS2-Gazebo to enable tag-based navigation, reducing waypoint navigation error by 35%.",
@@ -99,6 +100,16 @@ export const resumeData = {
       video: "/projects/aruco-navigation.mp4",
       category: "Robotics & Computer Vision"
     },
+
+    {
+      title: "Autonomous room cleaning robot",
+      description: "Worked on an autonomous room cleaning robot using ROS2, achieving 85% area coverage in simulated environments. Integrated LIDAR-based SLAM for mapping and navigation, reducing manual intervention by 60%.",
+      techStack: ["Python", "ROS2", "SLAM", "SENSOR FUSION"],
+      github: "https://github.com/AshuGITHUBtosh",
+      video: "/projects/room_cleaning_robot.mp4",
+      category: "Robotics & Automation"
+    },
+
     {
       title: "WhatsApp Chat Analyzer for Group Insights",
       description: "Parsed and analyzed 50,000+ chat messages, generating visual insights into activity trends by user and time. Automated visualization with Matplotlib/Seaborn, reducing manual analysis time by 30%.",
@@ -109,6 +120,18 @@ export const resumeData = {
       image: null,
       category: "Data Science"
     },
+
+    {
+      title: "Applying SLAM on a DIY robot using a 2D LIDAR",
+      description: "Implemented SLAM algorithms on a custom-built robot using a 2D LIDAR sensor, enabling autonomous mapping and navigation in unknown environments.",
+      techStack: ["Python", "ROS2", "SLAM", "LIDAR"],
+      github: "https://github.com/AshuGITHUBtosh",
+      video: "/projects/room_SLAM.mp4",
+      demo: null,
+      image: null,
+      category: "Data Science"
+    },
+
     {
       title: "Virtual Assistant",
       description: "Created a voice-activated virtual assistant using Python that can talk and show expression according to the conversation and also performs tasks like web searches, opening applications and a face recognition feature. Integrated speech recognition and text-to-speech for seamless interaction.",
